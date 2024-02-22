@@ -4,7 +4,7 @@ RUN yum -y update
 
 RUN yum install epel-release yum-utils -y
 RUN yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
-RUN yum-config-manager --enable remi-php81
+RUN yum-config-manager --enable remi-php74
 
 RUN yum install -y \
     gcc \
@@ -24,12 +24,12 @@ RUN yum install -y \
     php-mysql \
     php-dom \
     php-xml \
-    php-zip \
-    php-ldap \
     php-mbstring \
-    php-pecl-memcache \
     php-redis \
     git \
+    libssl-dev \
+    wget \
+    update-ca-certificates \
     nano
     
 RUN echo "ServerName localhost" >> /etc/httpd/conf/httpd.conf
