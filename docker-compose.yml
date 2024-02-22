@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+
+  ilan-wordpress:
+    build: .
+    ports:
+      - 9999:80
+    volumes:
+      - ./html:/var/www/html
+
+    container_name: ilan_wordpress
+    environment:
+
+      - WORDPRESS_DB_PASSWORD=root
+
+  ilan-mysql:
+    image: mysql:8.2
+    command:
+      'mysqld --max-allowed-packet=67108864'
+    ports:
+      - 3319:3306
+    volumes:
+      - ./mysql/runtime2:/var/lib/mysql
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+    container_name: ilan_mysql
+
+  phpmyadmin-ilan:
+    depends_on:
+      - ilan-mysql
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_hila
+    ports:
+      - 5599:80
+    environment:
+      PMA_HOST: ilan-mysql
+      MYSQL_ROOT_PASSWORD: root
