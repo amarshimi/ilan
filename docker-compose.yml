@@ -19,7 +19,7 @@ services:
     command:
       'mysqld --max-allowed-packet=67108864'
     ports:
-      - 3319:3306
+      - 3320:3306
     volumes:
       - ./mysql/runtime2:/var/lib/mysql
 
